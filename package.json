@@ -7,7 +7,9 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:task-frontend": "node dist/task-frontend/server/server.mjs"
+    "serve:ssr:task-frontend": "node dist/task-frontend/server/server.mjs",
+    "build:css": "npx @tailwindcss/cli -i src/tailwind.css -o src/output.css --minify",
+    "watch:css": "npx @tailwindcss/cli -i src/tailwind.css -o src/output.css --watch"
   },
   "private": true,
   "packageManager": "npm@10.9.2",
@@ -20,25 +22,30 @@
     "@angular/platform-server": "^21.2.0",
     "@angular/router": "^21.2.0",
     "@angular/ssr": "^21.2.19",
+    "@fortawesome/free-brands-svg-icons": "^7.3.1",
+    "@fortawesome/free-regular-svg-icons": "^7.3.1",
+    "@fortawesome/free-solid-svg-icons": "^7.3.1",
     "@tailwindcss/typography": "^0.5.20",
     "express": "^5.1.0",
     "rxjs": "~7.8.0",
-    "tailwindcss": "^4.3.3",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
     "@angular/build": "^21.2.19",
     "@angular/cli": "^21.2.19",
     "@angular/compiler-cli": "^21.2.0",
+    "@tailwindcss/cli": "^4.3.3",
     "@tailwindcss/postcss": "^4.1.12",
     "@types/express": "^5.0.1",
     "@types/node": "^20.17.19",
     "daisyui": "^5.6.18",
     "jsdom": "^28.0.0",
-    "postcss": "^8.5.3",
+    "postcss": "^8.5.19",
+    "postcss-cli": "^11.0.1",
     "prettier": "^3.8.1",
-    "tailwindcss": "^4.1.12",
+    "tailwindcss": "^4.3.3",
     "typescript": "~5.9.2",
     "vitest": "^4.0.8"
-  }
+  },
+  "browserslist": "> 1%"
 }
