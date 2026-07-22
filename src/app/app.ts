@@ -1,12 +1,13 @@
 import { Component, signal, ChangeDetectionStrategy, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterLinkWithHref } from '@angular/router';
 import { FaConfig, FaIconLibrary, FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { fontAwesomeIcons } from './shared/font-awesome-icons';
 import { Navbar } from "./layout/navbar/navbar";
+import { Footer } from "./layout/footer/footer";
 
 @Component({
   selector: 'taskapp-root',
-  imports: [RouterOutlet, FaIconComponent, Navbar],
+  imports: [RouterOutlet, FaIconComponent, Navbar, Footer, RouterLinkWithHref],
   templateUrl: './app.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './app.scss',
