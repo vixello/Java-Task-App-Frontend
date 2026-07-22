@@ -1,0 +1,23 @@
+<div class="navbar bg-base-100">
+    <div class="navbar-start">
+        <div class="dropdown">
+            <a class="btn btn-ghost text-xl">
+                <div class="border bg-secondary logo p-2" routerLink="/">Task App</div>
+            </a>
+        </div>
+    </div>
+
+    <div class="navbar-center flex">
+        <ul  class="menu menu-sm sm:menu-lg menu-horizontal px-1">
+            <li><a href="/">Home</a></li>
+            <li>
+                <details #taskMenu>
+                    <summary>Tasks</summary>
+                    <ul class="z-30">
+                        <li><a href="/tasks">All</a></li>
+                    </ul>
+                </details>
+            </li>
+        </ul >
+    </div>
+</div>

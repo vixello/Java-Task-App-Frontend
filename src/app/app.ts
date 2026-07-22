@@ -2,10 +2,11 @@ import { Component, signal, ChangeDetectionStrategy, inject } from '@angular/cor
 import { RouterOutlet } from '@angular/router';
 import { FaConfig, FaIconLibrary, FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { fontAwesomeIcons } from './shared/font-awesome-icons';
+import { Navbar } from "./layout/navbar/navbar";
 
 @Component({
-  selector: 'app-root',
-  imports: [RouterOutlet, FaIconComponent],
+  selector: 'taskapp-root',
+  imports: [RouterOutlet, FaIconComponent, Navbar],
   templateUrl: './app.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './app.scss',
