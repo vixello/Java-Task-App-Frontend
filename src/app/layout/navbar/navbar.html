@@ -1,21 +1,16 @@
-<div class="navbar bg-base-100">
-    <div class="navbar-start">
-        <button class="btn btn-ghost !bg-transparent !bg-none !border-transparent text-xl">
-            Task App
-        </button>
-    </div>
+<div class="navbar bg-base-100 shadow-sm">
+  <div class="navbar-start">
+    <a class="btn btn-ghost text-xl">Task App</a>
+  </div>
 
-    <div class="navbar-center flex">
-        <div class="menu menu-sm sm:menu-lg menu-horizontal px-1">
-            <li><a href="/">Home</a></li>
-            <li>
-                <details #taskMenu>
-                    <summary>Tasks</summary>
-                    <ul class="z-30">
-                        <li><a href="/tasks">All</a></li>
-                    </ul>
-                </details>
-            </li>
-        </div>
-    </div>
+  <div class="navbar-center">
+    <ul class="menu menu-horizontal px-1">
+      <li><a>Item 1</a></li>
+      <li><a>Item 3</a></li>
+    </ul>
+  </div>
+
+  <div class="navbar-end flex gap-2">
+    <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
+  </div>
 </div>
