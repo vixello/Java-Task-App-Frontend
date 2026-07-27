@@ -7,7 +7,15 @@
 
 import { IconDefinition } from '@fortawesome/angular-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { faExclamationTriangle, faExclamationCircle, faBell, faCircle, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCircle as farCircle } from '@fortawesome/free-regular-svg-icons';
 
-export const fontAwesomeIcons: IconDefinition[] = [
-    faUser
-]
+export const fontAwesomeIcons = [
+    faUser,
+    faExclamationTriangle,
+    faExclamationCircle,
+    faBell,
+    faCircle,
+    faCheck,
+    farCircle
+];

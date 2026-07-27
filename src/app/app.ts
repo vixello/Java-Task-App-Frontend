@@ -4,6 +4,8 @@ import { FaConfig, FaIconLibrary, FaIconComponent } from '@fortawesome/angular-f
 import { fontAwesomeIcons } from './shared/font-awesome-icons';
 import { Navbar } from "./layout/navbar/navbar";
 import { Footer } from "./layout/footer/footer";
+import { TaskItem } from "./layout/task-item/task-item";
+import { TasksList } from "./layout/tasks-list/tasks-list";
 
 @Component({
   selector: 'taskapp-root',
