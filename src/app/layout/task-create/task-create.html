@@ -1,0 +1,21 @@
+<div class="p-4">
+  <h2 class="text-xl font-bold mb-4">Create Task</h2>
+
+  <form (ngSubmit)="submit()">
+    <input class="border p-2 w-full mb-2" placeholder="Title" [(ngModel)]="title" name="title">
+    <textarea class="border p-2 w-full mb-2" placeholder="Description" [(ngModel)]="description" name="description"></textarea>
+    <input class="border p-2 w-full mb-2" type="date" [(ngModel)]="dueDate" name="dueDate">
+
+    <select class="border p-2 w-full mb-2" [(ngModel)]="priority" name="priority">
+      <option>LOW</option>
+      <option>MEDIUM</option>
+      <option>HIGH</option>
+    </select>
+<!--     <select class="border p-2 w-full mb-2" [(ngModel)]="status" name="status">
+      <option>OPEN</option>
+      <option>COMPLETE</option>
+    </select>
+ -->
+    <button class="bg-blue-500 text-white p-2 rounded">Create</button>
+  </form>
+</div>
