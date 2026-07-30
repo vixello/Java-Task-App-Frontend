@@ -9,6 +9,7 @@ import { IconDefinition } from '@fortawesome/angular-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { faExclamationTriangle, faExclamationCircle, faBell, faCircle, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faCircle as farCircle } from '@fortawesome/free-regular-svg-icons';
+import { faPlus, faPlusCircle, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 
 export const fontAwesomeIcons = [
     faUser,
@@ -17,5 +18,8 @@ export const fontAwesomeIcons = [
     faBell,
     faCircle,
     faCheck,
-    farCircle
+    farCircle,
+    faPlus,          
+    faPlusCircle,   
+    faPlusSquare
 ];
