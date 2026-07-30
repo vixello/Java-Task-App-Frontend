@@ -1,21 +1,41 @@
-<div class="p-4">
-  <h2 class="text-xl font-bold mb-4">Create Task</h2>
+<!-- Button to open modal -->
+<button class="btn btn-primary" (click)="open()">Create Task</button>
 
-  <form (ngSubmit)="submit()">
-    <input class="border p-2 w-full mb-2" placeholder="Title" [(ngModel)]="title" name="title">
-    <textarea class="border p-2 w-full mb-2" placeholder="Description" [(ngModel)]="description" name="description"></textarea>
-    <input class="border p-2 w-full mb-2" type="date" [(ngModel)]="dueDate" name="dueDate">
+<!-- Modal -->
+<dialog #taskDialog class="modal">
+  <div class="modal-box">
+    <h3 class="font-bold text-lg mb-4">Create Task</h3>
 
-    <select class="border p-2 w-full mb-2" [(ngModel)]="priority" name="priority">
-      <option>LOW</option>
-      <option>MEDIUM</option>
-      <option>HIGH</option>
-    </select>
-<!--     <select class="border p-2 w-full mb-2" [(ngModel)]="status" name="status">
-      <option>OPEN</option>
-      <option>COMPLETE</option>
-    </select>
- -->
-    <button class="bg-blue-500 text-white p-2 rounded">Create</button>
-  </form>
-</div>
+    <form (ngSubmit)="submit()" class="space-y-3">
+
+      <input class="input input-bordered w-full" 
+             placeholder="Title" 
+             [(ngModel)]="title" 
+             name="title">
+
+      <textarea class="textarea textarea-bordered w-full" 
+                placeholder="Description" 
+                [(ngModel)]="description" 
+                name="description"></textarea>
+
+      <input type="date" 
+             class="input input-bordered w-full" 
+             [(ngModel)]="dueDate" 
+             name="dueDate">
+
+      <select class="select select-bordered w-full" 
+              [(ngModel)]="priority" 
+              name="priority">
+        <option>LOW</option>
+        <option>MEDIUM</option>
+        <option>HIGH</option>
+      </select>
+
+      <button class="btn btn-primary w-full">Create</button>
+    </form>
+
+    <div class="modal-action">
+      <button class="btn" (click)="close()">Close</button>
+    </div>
+  </div>
+</dialog>
