@@ -1,0 +1,55 @@
+<section class="text-center py-16">
+
+  <h1 class="text-4xl font-bold mb-4">
+    Welcome to <span class="text-primary">TaskApp</span>
+  </h1>
+
+  <p class="text-lg text-base-content/70 max-w-xl mx-auto mb-10">
+    Organize your work, stay productive, and keep track of everything that matters.
+  </p>
+
+  <div class="flex justify-center gap-4 mb-16">
+    <a routerLink="/tasks" class="btn btn-primary btn-lg">
+      View Tasks
+    </a>
+
+    <a routerLink="/tasks" class="btn btn-outline btn-lg">
+      Learn More
+    </a>
+  </div>
+
+  <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+
+    <div class="p-6 bg-base-100 rounded-xl shadow-md">
+      <div class="text-primary text-4xl mb-3">
+        <fa-icon [icon]="['fas', 'check']"></fa-icon>
+      </div>
+      <h3 class="font-bold text-xl mb-2">Track Progress</h3>
+      <p class="text-base-content/70">
+        Stay on top of your tasks with clear priorities and deadlines.
+      </p>
+    </div>
+
+    <div class="p-6 bg-base-100 rounded-xl shadow-md">
+      <div class="text-primary text-4xl mb-3">
+        <fa-icon [icon]="['fas', 'bell']"></fa-icon>
+      </div>
+      <h3 class="font-bold text-xl mb-2">Smart Reminders</h3>
+      <p class="text-base-content/70">
+        Never miss an important task again with built‑in notifications.
+      </p>
+    </div>
+
+    <div class="p-6 bg-base-100 rounded-xl shadow-md">
+      <div class="text-primary text-4xl mb-3">
+        <fa-icon [icon]="['fas', 'plus']"></fa-icon>
+      </div>
+      <h3 class="font-bold text-xl mb-2">Easy Task Creation</h3>
+      <p class="text-base-content/70">
+        Add new tasks quickly with a clean and intuitive interface.
+      </p>
+    </div>
+
+  </div>
+
+</section>

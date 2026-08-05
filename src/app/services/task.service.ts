@@ -27,4 +27,5 @@ export class TaskService {
     createTask(task: Omit<TaskDto, 'id'>): Observable<TaskDto> {
         return this.http.post<TaskDto>(this.apiUrl, task);
     }
+
 }
