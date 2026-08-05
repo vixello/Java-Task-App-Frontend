@@ -11,6 +11,7 @@ import { faExclamationTriangle, faExclamationCircle, faBell, faCircle, faCheck }
 import { faCircle as farCircle } from '@fortawesome/free-regular-svg-icons';
 import { faPlus, faPlusCircle, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 import { faHome, faTasks, faClipboardList, faCalendar } from '@fortawesome/free-solid-svg-icons';
+import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 export const fontAwesomeIcons = [
     faUser,
@@ -20,11 +21,13 @@ export const fontAwesomeIcons = [
     faCircle,
     faCheck,
     farCircle,
-    faPlus,          
-    faPlusCircle,   
+    faPlus,
+    faPlusCircle,
     faPlusSquare,
-    faHome,         
-    faTasks,           
-    faClipboardList,   
-    faCalendar       
+    faHome,
+    faTasks,
+    faClipboardList,
+    faCalendar,
+    faPen,     
+    faTrash
 ];

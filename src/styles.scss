@@ -2,3 +2,13 @@
 @import "./output.css";
 
 /* You can add global styles to this file, and also import other style files */
+.btn-icon {
+  --btn-bg: transparent;
+  --btn-border: transparent;
+  --btn-shadow: none;
+}
+
+.btn-icon:hover {
+  --btn-bg: var(--color-base-200);
+  --btn-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}

@@ -28,4 +28,7 @@ export class TaskService {
         return this.http.post<TaskDto>(this.apiUrl, task);
     }
 
+    updateTask(task: Omit<TaskDto, 'id'>): Observable<TaskDto>{
+        return this.http.put<TaskDto>("${this.apiUrl}/${task.id}", task);
+    }
 }
