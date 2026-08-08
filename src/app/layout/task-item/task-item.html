@@ -1,48 +1,55 @@
-<article class="card bg-base-100 shadow-sm w-full max-w-xl rounded-lg overflow-hidden ">
-    <div class="flex gap-4 p-4 items-start">
-
-        <!-- thumbnail -->
-        <div class="w-16 h-16 rounded-md flex flex-col items-center justify-center gap-1">
-            <fa-icon [icon]="priorityIcon" [ngClass]="priorityColor" class="text-3xl"></fa-icon>
-            <div class="text-xs uppercase font-semibold opacity-60 text-center">
-                {{ task.priority }}
-            </div>
+<div class="flex flex-row items-center gap-4 w-full">
+    <div class="flex flex-col justify-start">
+        <div class="text-2xl font-medium font-mono tracking-tight whitespace-nowrap">
+            {{ task.dueDate }}
         </div>
 
-        <!-- content -->
-        <div class="flex-1 min-w-0">
-
-            <!-- title + actions -->
-            <div class="flex items-start justify-between gap-3">
-                <div class="min-w-0">
-                    <h3 class="text-base font-semibold leading-tight truncate">{{ task.title }}</h3>
-                </div>
-
-                <div class="flex items-center gap-2 ml-3">
-                    <button class="btn btn-icon btn-square btn-sm p-2" aria-label="Edit">
-                        <fa-icon [icon]="['fas','pen']"></fa-icon>
-                    </button>
-
-                    <button class="btn btn-icon btn-square btn-sm p-2 text-red-600" aria-label="Delete">
-                        <fa-icon [icon]="['fas','trash']"></fa-icon>
-                    </button>
-                </div>
-            </div>
-
-            <!-- description -->
-            <p class="mt-2 text-sm text-base-content/70 leading-relaxed line-clamp-3">
-                {{ task.description }}
-            </p>
-
-            <!-- ⭐ CHECK CONTAINER (THIS FIXES EVERYTHING) -->
-            <div class="relative h-10"> 
-                <button 
-                    class="absolute bottom-0 right-0 btn btn-icon btn-square btn-sm p-2 text-green-600"
-                    aria-label="Finished">
-                    <fa-icon [icon]="['fas','check']" class="text-xl"></fa-icon>
-                </button>
-            </div>
-
-        </div>
     </div>
-</article>
+    <article class="card bg-base-100 shadow-sm w-full max-w-xl rounded-lg overflow-hidden ">
+        <div class="flex gap-4 p-4 items-start">
+
+            <!-- thumbnail -->
+            <div class="w-16 h-16 rounded-md flex flex-col items-center justify-center gap-1">
+                <fa-icon [icon]="priorityIcon" [ngClass]="priorityColor" class="text-3xl"></fa-icon>
+                <div class="text-xs uppercase font-semibold opacity-60 text-center">
+                    {{ task.priority }}
+                </div>
+            </div>
+
+            <!-- content -->
+            <div class="flex-1 min-w-0">
+
+                <!-- title + actions -->
+                <div class="flex items-start justify-between gap-3">
+                    <div class="min-w-0">
+                        <h3 class="text-base font-semibold leading-tight truncate">{{ task.title }}</h3>
+                    </div>
+
+                    <div class="flex items-center gap-2 ml-3">
+                        <button class="btn btn-icon btn-square btn-sm p-2" aria-label="Edit">
+                            <fa-icon [icon]="['fas','pen']"></fa-icon>
+                        </button>
+
+                        <button class="btn btn-icon btn-square btn-sm p-2 text-red-600" aria-label="Delete">
+                            <fa-icon [icon]="['fas','trash']"></fa-icon>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- description -->
+                <p class="mt-2 text-sm text-base-content/70 leading-relaxed line-clamp-3">
+                    {{ task.description }}
+                </p>
+
+                <!-- ⭐ CHECK CONTAINER (THIS FIXES EVERYTHING) -->
+                <div class="relative h-10">
+                    <button class="absolute bottom-0 right-0 btn btn-icon btn-square btn-sm p-2 text-green-600"
+                        aria-label="Finished">
+                        <fa-icon [icon]="['fas','check']" class="text-xl"></fa-icon>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </article>
+</div>
