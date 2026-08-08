@@ -7,6 +7,6 @@ import { Home } from './layout/home/home';
 export const routes: Routes = [
   //{ path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: '', component: Home },
-  { path: 'tasks', component: TasksList },
+  { path: 'tasks', component: TasksList, data: { noReuse: true } }
   //{ path: 'create', component: TaskCreate}
 ];
