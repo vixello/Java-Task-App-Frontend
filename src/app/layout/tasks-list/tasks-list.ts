@@ -47,6 +47,10 @@ export class TasksList {
     });
   }
 
+  deleteTask(task: TaskDto) {
+    this.taskService.deleteTask(task.id)
+    .subscribe({next: () => alert('Task deleted!')});
+  }
 
   get groupedTasks() {
     const groups: Record<string, TaskDto[]> = {};

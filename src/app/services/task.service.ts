@@ -28,7 +28,11 @@ export class TaskService {
         return this.http.post<TaskDto>(this.apiUrl, task);
     }
 
-    updateTask(task: Omit<TaskDto, 'id'>): Observable<TaskDto>{
-        return this.http.put<TaskDto>("${this.apiUrl}/${task.id}", task);
+    updateTask(taskId: string, task: Omit<TaskDto, 'id'>): Observable<TaskDto> {
+        return this.http.put<TaskDto>(`${this.apiUrl}/${taskId}`, task);
+    }
+
+    deleteTask(taskId: string): Observable<void> {
+        return this.http.delete<void>(`${this.apiUrl}/${taskId}`);
     }
 }

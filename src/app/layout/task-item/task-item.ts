@@ -3,10 +3,11 @@ import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 import { TaskDto } from '../../services/task.service';
 import { CommonModule } from '@angular/common';
 import { faExclamationCircle, faExclamationTriangle, faCircle } from '@fortawesome/free-solid-svg-icons';
+import { TaskUpdate } from "../task-update/task-update";
 
 @Component({
   selector: 'taskapp-task-item',
-  imports: [CommonModule, FaIconComponent],
+  imports: [CommonModule, FaIconComponent, TaskUpdate],
   templateUrl: './task-item.html',
   styleUrl: './task-item.scss',
 })
