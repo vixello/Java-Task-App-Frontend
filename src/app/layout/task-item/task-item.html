@@ -65,11 +65,20 @@
           {{ task.priority }}
         </span>
 
-        <button type="button" class="btn btn-ghost btn-circle btn-sm text-success" aria-label="Mark as finished">
-          <fa-icon [icon]="['fas', 'check']" class="text-sm">
-          </fa-icon>
-        </button>
-
+        @if (this.task.status != 'COMPLETE'){
+        <div class="tooltip tooltip-left" data-tip="Mark as finished">
+          <button type="button" class="btn btn-ghost btn-circle btn-sm text-success" (click)="finishTask()">
+            <fa-icon [icon]="['fas', 'check']" class="text-sm"></fa-icon>
+          </button>
+        </div>
+        }
+        @else{
+        <div class="tooltip tooltip-left" data-tip="Mark as unfinished">
+          <button type="button" class="btn btn-ghost btn-circle btn-sm text-success" (click)="unfinishTask()">
+            <fa-icon [icon]="['fas', 'reply']" class="text-sm"></fa-icon>
+          </button>
+        </div>
+        }
       </div>
 
     </div>

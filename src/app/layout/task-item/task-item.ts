@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 import { TaskDto } from '../../services/task.service';
 import { CommonModule } from '@angular/common';
@@ -16,19 +16,70 @@ export class TaskItem {
   @Input() task!: TaskDto;
 
   @Output() edit = new EventEmitter<TaskDto>();
+  @Output() finish = new EventEmitter<TaskDto>();
   @Output() deleted = new EventEmitter<string>();
-  
+
   constructor(private taskService: TaskService) { }
 
-  editTask(){
+  editTask() {
     this.edit.emit(this.task);
   }
 
   deleteTask() {
     if (!this.task) return;
     this.taskService.deleteTask(this.task.id).subscribe({
-      next: () => {alert('Task deleted!');
+      next: () => {
+        alert('Task deleted!');
         this.deleted.emit(this.task.id);
+      }
+    });
+  }
+
+  finishing = false;
+  unFinishing = false;
+
+  finishTask() {
+    if (this.finishing) return;
+
+    this.finishing = true;
+
+    this.taskService.updateTask(this.task.id, {
+      title: this.task.title,
+      description: this.task.description,
+      dueDate: this.task.dueDate,
+      priority: this.task.priority,
+      status: 'COMPLETE'
+    }).subscribe({
+      next: (updatedTask) => {
+        setTimeout(() => {
+          this.finish.emit(updatedTask);
+        }, 350);
+      },
+      error: () => {
+        this.finishing = false;
+      }
+    });
+  }
+
+  unfinishTask() {
+    if (this.unFinishing) return;
+
+    this.unFinishing = true;
+
+    this.taskService.updateTask(this.task.id, {
+      title: this.task.title,
+      description: this.task.description,
+      dueDate: this.task.dueDate,
+      priority: this.task.priority,
+      status: 'OPEN'
+    }).subscribe({
+      next: (updatedTask) => {
+        setTimeout(() => {
+          this.finish.emit(updatedTask);
+        }, 350);
+      },
+      error: () => {
+        this.unFinishing = false;
       }
     });
   }

@@ -88,7 +88,16 @@ import "cally";
 
   @if (!loading()) {
   <div class="space-y-8">
+    <div class="tabs tabs-boxed w-fit">
+      <button type="button" class="tab" [class.tab-active]="selectedStatus === 'OPEN'" (click)="setStatusTab('OPEN')">
+        Active
+      </button>
 
+      <button type="button" class="tab" [class.tab-active]="selectedStatus === 'COMPLETE'"
+        (click)="setStatusTab('COMPLETE')">
+        Finished
+      </button>
+    </div>
     @for (date of groupedDates; track date) {
 
     <section class="space-y-3">
@@ -107,7 +116,7 @@ import "cally";
         @for (task of groupedTasks[date]; track task.id) {
 
         <taskapp-task-item [task]="task" class="block w-full" (edit)="openUpdateDialog($event)"
-          (deleted)="deleteTaskFromList($event)">
+          (deleted)="deleteTaskFromList($event)" (finish)="updateTaskInList($event)">
         </taskapp-task-item>
 
         }

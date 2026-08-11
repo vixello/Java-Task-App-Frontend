@@ -1,7 +1,7 @@
 import { Component, ViewChild, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TaskItem } from "../task-item/task-item";
 import { TaskCreate } from "../task-create/task-create";
-import { TaskDto, TaskService } from '../../services/task.service';
+import { TaskDto, TaskService, TaskStatus } from '../../services/task.service';
 import { TaskItemSkeleton } from "../task-item-skeleton/task-item-skeleton";
 import { CommonModule } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
@@ -33,6 +33,7 @@ export class TasksList {
 
   searchQuery = '';
   dateQuery = '';
+  selectedStatus: TaskStatus = 'OPEN';
 
   constructor(
     private taskService: TaskService,
@@ -60,34 +61,23 @@ export class TasksList {
   }
 
   openUpdateDialog(task: TaskDto) {
-    console.log('TASK:', task);
-    console.log('UPDATE MODAL:', this.updateModal);
-    console.log('OPEN:', typeof this.updateModal?.open);
-
     this.updateModal.open(task);
   }
 
   updateTaskInList(updatedTask: TaskDto) {
-    console.log('PARENT UPDATE:', updatedTask);
-
     this.tasks.update(tasks => {
       const result = tasks.map(task =>
         task.id === updatedTask.id ? updatedTask : task
       );
 
-      console.log('AFTER UPDATE:', result);
       return result;
     });
   }
 
   deleteTaskFromList(taskId: string) {
-    console.log('PARENT DELETE:', taskId);
-    console.log('BEFORE:', this.tasks());
-
     this.tasks.update(tasks => {
       const result = tasks.filter(task => task.id !== taskId);
 
-      console.log('AFTER:', result);
       return result;
     });
   }
@@ -110,20 +100,25 @@ export class TasksList {
   clearDate() {
     this.dateQuery = '';
   }
-  
+
+  setStatusTab(status: TaskStatus) {
+    this.selectedStatus = status;
+  }
+
   get groupedTasks() {
     const groups: Record<string, TaskDto[]> = {};
     const query = this.searchQuery.trim().toLowerCase();
     const date = this.dateQuery;
 
     const list = this.tasks().filter(task => {
+      const matchesStatus = task.status === this.selectedStatus;
       const matchesText = !query ||
         task.title.toLowerCase().includes(query) ||
         task.description.toLowerCase().includes(query);
       const matchesDate =
         !date || task.dueDate === date;
 
-      return matchesText && matchesDate;
+      return matchesText && matchesDate && matchesStatus;
     }
 
     );

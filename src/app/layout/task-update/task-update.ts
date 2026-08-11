@@ -1,5 +1,5 @@
 import { EventEmitter, Component, ViewChild, ElementRef, Input, signal, Output } from '@angular/core';
-import { TaskDto, TaskService } from '../../services/task.service';
+import {TaskDto, TaskPriority, TaskStatus, TaskService} from '../../services/task.service';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -20,8 +20,8 @@ export class TaskUpdate {
   title = signal('');
   description = signal('');
   dueDate = signal('');
-  priority = signal('LOW');
-  status = signal('OPEN');
+  priority = signal<TaskPriority>('LOW');
+  status = signal<TaskStatus>('OPEN');
 
   constructor(private taskService: TaskService) { }
 

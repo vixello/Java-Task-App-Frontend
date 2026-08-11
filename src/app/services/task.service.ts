@@ -2,13 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+
+export type TaskStatus = 'OPEN' | 'COMPLETE';
+export type TaskPriority = 'LOW' | 'MEDIUM' | 'HIGH';
+
 export interface TaskDto {
     id: string;
     title: string;
     description: string;
     dueDate: string;
-    priority: string;
-    status: string;
+    priority: TaskPriority;
+    status: TaskStatus;
 }
 
 @Injectable({

@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
-import { TaskDto, TaskService } from '../../services/task.service';
+import {TaskDto, TaskPriority, TaskStatus, TaskService} from '../../services/task.service';
 import { FormsModule } from '@angular/forms';
 import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 
@@ -18,8 +18,8 @@ export class TaskCreate {
   title = '';
   description = '';
   dueDate = '';
-  priority = 'LOW';
-  status = 'OPEN';
+  priority = <TaskPriority>'LOW';
+  status = <TaskStatus>'OPEN';
 
   constructor(private taskService: TaskService) { }
 
