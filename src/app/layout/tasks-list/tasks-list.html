@@ -1,34 +1,80 @@
-<main class="flex flex-col gap-4">
-  <div class="flex justify-end">
-    <taskapp-task-create (created)="addTaskToList($event)"></taskapp-task-create>
+<!-- 
+ 
+| Klasa           | Co robi                                                        |
+| --------------- | -------------------------------------------------------------- |
+| `mx-auto`       | centruje cały kontener                                         |
+| `w-full`        | pozwala mu zajmować całą dostępną szerokość                    |
+| `max-w-2xl`     | ogranicza szerokość listy                                      |
+| `flex flex-col` | elementy układają się pionowo                                  |
+| `gap-6`         | większy, ale kontrolowany odstęp między sekcjami               |
+| `px-4`          | poziomy padding, żeby na telefonie lista nie dotykała krawędzi |
+| `py-6`          | padding góra/dół                                               |
+
+-->
+
+<main class="mx-auto flex w-full max-w-2xl flex-col gap-6 px-4 py-6">
+
+  <div class="flex items-center justify-between">
+    <div>
+      <h1 class="text-xl font-semibold tracking-tight">Tasks</h1>
+      <p class="mt-1 text-sm text-base-content/60">
+        Keep track of what needs to get done.
+      </p>
+    </div>
+
+    <taskapp-task-create
+      (created)="addTaskToList($event)">
+    </taskapp-task-create>
   </div>
-  @if(loading()){
-  <div class="flex flex-col items-center w-full">
-    <ul class="list bg-base-100 rounded-box w-full max-w-xl">
-      <li class="list-col">
-        <taskapp-task-item-skeleton></taskapp-task-item-skeleton>
-        <taskapp-task-item-skeleton></taskapp-task-item-skeleton>
-        <taskapp-task-item-skeleton></taskapp-task-item-skeleton>
-      </li>
-    </ul>
-  </div>
+
+  @if (loading()) {
+    <div class="space-y-3">
+      <taskapp-task-item-skeleton></taskapp-task-item-skeleton>
+      <taskapp-task-item-skeleton></taskapp-task-item-skeleton>
+      <taskapp-task-item-skeleton></taskapp-task-item-skeleton>
+    </div>
   }
 
-  @if(!loading()){
-  @for(date of groupedDates; track date){ <!-- DATE HEADER -->
-  <div class="text-2xl font-medium font-mono tracking-tight w-full text-center">
-    {{ date }}
-  </div>
-  <div class="flex flex-col items-center w-full">
-    @for(task of groupedTasks[date]; track task.id){
-    <taskapp-task-item [task]="task" class="w-full max-w-xl" 
-      (edit)="openUpdateDialog($event)"
-      (deleted)="deleteTaskFromList($event)">
-    </taskapp-task-item>
-    }
-  </div>
+  @if (!loading()) {
+    <div class="space-y-8">
+
+      @for (date of groupedDates; track date) {
+
+        <section class="space-y-3">
+
+          <!-- DATE -->
+          <div class="flex items-center gap-3">
+            <h2 class="shrink-0 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+              {{ date }}
+            </h2>
+
+            <div class="h-px flex-1 bg-base-300"></div>
+          </div>
+
+          <!-- TASKS -->
+          <div class="space-y-2">
+            @for (task of groupedTasks[date]; track task.id) {
+
+              <taskapp-task-item
+                [task]="task"
+                class="block w-full"
+                (edit)="openUpdateDialog($event)"
+                (deleted)="deleteTaskFromList($event)">
+              </taskapp-task-item>
+
+            }
+          </div>
+
+        </section>
+
+      }
+
+    </div>
   }
-  }
-  <taskapp-task-update #taskUpdate (updated)="updateTaskInList($event)"></taskapp-task-update>
+
+  <taskapp-task-update
+    #taskUpdate
+    (updated)="updateTaskInList($event)">
+  </taskapp-task-update>
 
 </main>
