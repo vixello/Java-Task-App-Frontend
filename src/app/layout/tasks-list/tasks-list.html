@@ -22,59 +22,105 @@
       </p>
     </div>
 
-    <taskapp-task-create
-      (created)="addTaskToList($event)">
+    <taskapp-task-create (created)="addTaskToList($event)">
     </taskapp-task-create>
   </div>
 
+  <div class="w-full">
+    <label class="input input-bordered flex items-center gap-2 w-full">
+      <fa-icon [icon]="['fas', 'magnifying-glass']" class="text-base-content/40">
+      </fa-icon>
+      <input type="text" class="grow" placeholder="Search tasks..." [(ngModel)]="searchQuery" />
+      @if (searchQuery){
+      <button type="button" class="btn btn-ghost btn-xs btn-circle" (click)="searchQuery = ''">
+        <fa-icon [icon]="['fas','xmark']"></fa-icon>
+      </button>
+      }
+    </label>
+  </div>
+  <!--
+* Import Cally web component from CDN
+<script type="module" src="https://unpkg.com/cally"></script>
+
+* Or install as a dependency:
+npm i cally
+* and import it in JS
+import "cally";
+-->
+  <div class="input input-bordered flex w-full items-center gap-2">
+    <!-- Open calendar -->
+    <button type="button" popovertarget="cally-popover1" id="cally1" class="flex-1 text-left"
+      style="anchor-name: --cally1">
+      {{ dateQuery || 'Pick a date' }}
+    </button>
+
+    <!-- Clear -->
+    @if (dateQuery) {
+    <button type="button" class="btn btn-ghost btn-xs btn-circle" (click)="clearDate()" aria-label="Clear date">
+      <fa-icon [icon]="['fas', 'xmark']"></fa-icon>
+    </button>
+    }
+  </div>
+
+  <div popover id="cally-popover1" class="dropdown bg-base-100 rounded-box shadow-lg" style="position-anchor:--cally1">
+    <calendar-date class="cally" (change)="onDateChange($event)">
+      <svg aria-label="Previous" class="fill-current size-4" slot="previous" xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24">
+        <path d="M15.75 19.5 8.25 12l7.5-7.5"></path>
+      </svg>
+      <svg aria-label="Next" class="fill-current size-4" slot="next" xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24">
+        <path d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
+      </svg>
+      <calendar-month></calendar-month>
+    </calendar-date>
+
+  </div>
+
+
   @if (loading()) {
-    <div class="space-y-3">
-      <taskapp-task-item-skeleton></taskapp-task-item-skeleton>
-      <taskapp-task-item-skeleton></taskapp-task-item-skeleton>
-      <taskapp-task-item-skeleton></taskapp-task-item-skeleton>
-    </div>
+  <div class="space-y-3">
+    <taskapp-task-item-skeleton></taskapp-task-item-skeleton>
+    <taskapp-task-item-skeleton></taskapp-task-item-skeleton>
+    <taskapp-task-item-skeleton></taskapp-task-item-skeleton>
+  </div>
   }
 
   @if (!loading()) {
-    <div class="space-y-8">
+  <div class="space-y-8">
 
-      @for (date of groupedDates; track date) {
+    @for (date of groupedDates; track date) {
 
-        <section class="space-y-3">
+    <section class="space-y-3">
 
-          <!-- DATE -->
-          <div class="flex items-center gap-3">
-            <h2 class="shrink-0 text-xs font-semibold uppercase tracking-wider text-base-content/50">
-              {{ date }}
-            </h2>
+      <!-- DATE -->
+      <div class="flex items-center gap-3">
+        <h2 class="shrink-0 text-xs font-semibold uppercase tracking-wider text-base-content/50">
+          {{ date }}
+        </h2>
 
-            <div class="h-px flex-1 bg-base-300"></div>
-          </div>
+        <div class="h-px flex-1 bg-base-300"></div>
+      </div>
 
-          <!-- TASKS -->
-          <div class="space-y-2">
-            @for (task of groupedTasks[date]; track task.id) {
+      <!-- TASKS -->
+      <div class="space-y-2">
+        @for (task of groupedTasks[date]; track task.id) {
 
-              <taskapp-task-item
-                [task]="task"
-                class="block w-full"
-                (edit)="openUpdateDialog($event)"
-                (deleted)="deleteTaskFromList($event)">
-              </taskapp-task-item>
+        <taskapp-task-item [task]="task" class="block w-full" (edit)="openUpdateDialog($event)"
+          (deleted)="deleteTaskFromList($event)">
+        </taskapp-task-item>
 
-            }
-          </div>
+        }
+      </div>
 
-        </section>
+    </section>
 
-      }
+    }
 
-    </div>
+  </div>
   }
 
-  <taskapp-task-update
-    #taskUpdate
-    (updated)="updateTaskInList($event)">
+  <taskapp-task-update #taskUpdate (updated)="updateTaskInList($event)">
   </taskapp-task-update>
 
 </main>

@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ViewChild, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TaskItem } from "../task-item/task-item";
 import { TaskCreate } from "../task-create/task-create";
 import { TaskDto, TaskService } from '../../services/task.service';
@@ -7,15 +7,20 @@ import { CommonModule } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 import { signal } from '@angular/core';
 import { TaskUpdate } from "../task-update/task-update";
+import { FaIconComponent } from "@fortawesome/angular-fontawesome";
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'taskapp-tasks-list',
-  imports: [CommonModule, TaskItem, TaskCreate, TaskItemSkeleton, TaskUpdate],
+  standalone: true,
+  imports: [CommonModule, TaskItem, TaskCreate, TaskItemSkeleton, TaskUpdate, FaIconComponent, FormsModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './tasks-list.html',
   styleUrl: './tasks-list.scss',
 })
 export class TasksList {
   @ViewChild('taskUpdate', { read: TaskUpdate })
+
   updateModal!: TaskUpdate;
 
   loading = signal(true);
@@ -26,6 +31,8 @@ export class TasksList {
     LOW: 3
   };
 
+  searchQuery = '';
+  dateQuery = '';
 
   constructor(
     private taskService: TaskService,
@@ -60,45 +67,66 @@ export class TasksList {
     this.updateModal.open(task);
   }
 
-updateTaskInList(updatedTask: TaskDto) {
-  console.log('PARENT UPDATE:', updatedTask);
+  updateTaskInList(updatedTask: TaskDto) {
+    console.log('PARENT UPDATE:', updatedTask);
 
-  this.tasks.update(tasks => {
-    const result = tasks.map(task =>
-      task.id === updatedTask.id ? updatedTask : task
-    );
+    this.tasks.update(tasks => {
+      const result = tasks.map(task =>
+        task.id === updatedTask.id ? updatedTask : task
+      );
 
-    console.log('AFTER UPDATE:', result);
-    return result;
-  });
-}
+      console.log('AFTER UPDATE:', result);
+      return result;
+    });
+  }
 
-deleteTaskFromList(taskId: string) {
-  console.log('PARENT DELETE:', taskId);
-  console.log('BEFORE:', this.tasks());
+  deleteTaskFromList(taskId: string) {
+    console.log('PARENT DELETE:', taskId);
+    console.log('BEFORE:', this.tasks());
 
-  this.tasks.update(tasks => {
-    const result = tasks.filter(task => task.id !== taskId);
+    this.tasks.update(tasks => {
+      const result = tasks.filter(task => task.id !== taskId);
 
-    console.log('AFTER:', result);
-    return result;
-  });
-}
+      console.log('AFTER:', result);
+      return result;
+    });
+  }
 
-addTaskToList(newTask: TaskDto) {
-  console.log('PARENT CREATE:', newTask);
+  addTaskToList(newTask: TaskDto) {
+    console.log('PARENT CREATE:', newTask);
 
-  this.tasks.update(tasks => {
-    const result = [...tasks, newTask];
+    this.tasks.update(tasks => {
+      const result = [...tasks, newTask];
 
-    console.log('AFTER CREATE:', result);
-    return result;
-  });
-}
+      console.log('AFTER CREATE:', result);
+      return result;
+    });
+  }
 
+  onDateChange(event: Event) {
+    this.dateQuery = (event.target as HTMLInputElement).value;
+  }
+
+  clearDate() {
+    this.dateQuery = '';
+  }
+  
   get groupedTasks() {
     const groups: Record<string, TaskDto[]> = {};
-    const list = this.tasks();
+    const query = this.searchQuery.trim().toLowerCase();
+    const date = this.dateQuery;
+
+    const list = this.tasks().filter(task => {
+      const matchesText = !query ||
+        task.title.toLowerCase().includes(query) ||
+        task.description.toLowerCase().includes(query);
+      const matchesDate =
+        !date || task.dueDate === date;
+
+      return matchesText && matchesDate;
+    }
+
+    );
 
     for (const task of list) {
       const date = task.dueDate;
