@@ -1,5 +1,5 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
-import { TaskService } from '../../services/task.service';
+import { Component, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import { TaskDto, TaskService } from '../../services/task.service';
 import { FormsModule } from '@angular/forms';
 import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 
@@ -13,6 +13,7 @@ import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 
 export class TaskCreate {
   @ViewChild('taskDialog') dialog!: ElementRef<HTMLDialogElement>;
+  @Output() created = new EventEmitter<TaskDto>();
 
   title = '';
   description = '';
@@ -37,7 +38,11 @@ export class TaskCreate {
       priority: this.priority,
       status: this.status
     }).subscribe({
-      next: () => alert('Task created!')
+      next: (newTask) =>{ 
+        alert('Task created!');
+        this.created.emit(newTask);
+        this.close();
+      }
     });
   }
 }

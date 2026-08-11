@@ -1,19 +1,38 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output} from '@angular/core';
 import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 import { TaskDto } from '../../services/task.service';
 import { CommonModule } from '@angular/common';
 import { faExclamationCircle, faExclamationTriangle, faCircle } from '@fortawesome/free-solid-svg-icons';
-import { TaskUpdate } from "../task-update/task-update";
+import { TaskService } from '../../services/task.service'
 
 @Component({
   selector: 'taskapp-task-item',
-  imports: [CommonModule, FaIconComponent, TaskUpdate],
+  imports: [CommonModule, FaIconComponent],
   templateUrl: './task-item.html',
   styleUrl: './task-item.scss',
 })
 
 export class TaskItem {
   @Input() task!: TaskDto;
+
+  @Output() edit = new EventEmitter<TaskDto>();
+  @Output() deleted = new EventEmitter<string>();
+  
+  constructor(private taskService: TaskService) { }
+
+  editTask(){
+    this.edit.emit(this.task);
+  }
+
+  deleteTask() {
+    if (!this.task) return;
+    this.taskService.deleteTask(this.task.id).subscribe({
+      next: () => {alert('Task deleted!');
+        this.deleted.emit(this.task.id);
+      }
+    });
+  }
+
   get priorityIcon() {
     switch (this.task.priority) {
       case 'HIGH':

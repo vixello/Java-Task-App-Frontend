@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { TaskItem } from "../task-item/task-item";
 import { TaskCreate } from "../task-create/task-create";
 import { TaskDto, TaskService } from '../../services/task.service';
@@ -6,14 +6,18 @@ import { TaskItemSkeleton } from "../task-item-skeleton/task-item-skeleton";
 import { CommonModule } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 import { signal } from '@angular/core';
+import { TaskUpdate } from "../task-update/task-update";
 
 @Component({
   selector: 'taskapp-tasks-list',
-  imports: [CommonModule, TaskItem, TaskCreate, TaskItemSkeleton],
+  imports: [CommonModule, TaskItem, TaskCreate, TaskItemSkeleton, TaskUpdate],
   templateUrl: './tasks-list.html',
   styleUrl: './tasks-list.scss',
 })
 export class TasksList {
+  @ViewChild('taskUpdate', { read: TaskUpdate })
+  updateModal!: TaskUpdate;
+
   loading = signal(true);
   tasks = signal<TaskDto[]>([]);
   priorityOrder: Record<string, number> = {
@@ -23,7 +27,8 @@ export class TasksList {
   };
 
 
-  constructor(private taskService: TaskService,
+  constructor(
+    private taskService: TaskService,
     private router: Router
   ) { };
 
@@ -47,10 +52,49 @@ export class TasksList {
     });
   }
 
-  deleteTask(task: TaskDto) {
-    this.taskService.deleteTask(task.id)
-    .subscribe({next: () => alert('Task deleted!')});
+  openUpdateDialog(task: TaskDto) {
+    console.log('TASK:', task);
+    console.log('UPDATE MODAL:', this.updateModal);
+    console.log('OPEN:', typeof this.updateModal?.open);
+
+    this.updateModal.open(task);
   }
+
+updateTaskInList(updatedTask: TaskDto) {
+  console.log('PARENT UPDATE:', updatedTask);
+
+  this.tasks.update(tasks => {
+    const result = tasks.map(task =>
+      task.id === updatedTask.id ? updatedTask : task
+    );
+
+    console.log('AFTER UPDATE:', result);
+    return result;
+  });
+}
+
+deleteTaskFromList(taskId: string) {
+  console.log('PARENT DELETE:', taskId);
+  console.log('BEFORE:', this.tasks());
+
+  this.tasks.update(tasks => {
+    const result = tasks.filter(task => task.id !== taskId);
+
+    console.log('AFTER:', result);
+    return result;
+  });
+}
+
+addTaskToList(newTask: TaskDto) {
+  console.log('PARENT CREATE:', newTask);
+
+  this.tasks.update(tasks => {
+    const result = [...tasks, newTask];
+
+    console.log('AFTER CREATE:', result);
+    return result;
+  });
+}
 
   get groupedTasks() {
     const groups: Record<string, TaskDto[]> = {};

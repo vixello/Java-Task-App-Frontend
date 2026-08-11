@@ -1,0 +1,66 @@
+<dialog #taskDialog class="modal">
+  <div class="modal-box">
+
+    <h3 class="font-bold text-lg mb-4">
+      Update Task
+    </h3>
+
+    <form (ngSubmit)="submit()" class="space-y-3">
+
+      <p class="text-red-500">
+        {{ title() }}
+      </p>
+
+      <input
+        class="input input-bordered w-full"
+        [ngModel]="title()"
+        (ngModelChange)="title.set($event)"
+        name="title"
+        type="text"
+      >
+
+      <textarea
+        class="textarea textarea-bordered w-full"
+        [ngModel]="description()"
+        (ngModelChange)="description.set($event)"
+        name="description"
+      ></textarea>
+
+      <input
+        type="date"
+        class="input input-bordered w-full"
+        [ngModel]="dueDate()"
+        (ngModelChange)="dueDate.set($event)"
+        name="dueDate"
+      >
+
+      <select
+        class="select select-bordered w-full"
+        [ngModel]="priority()"
+        (ngModelChange)="priority.set($event)"
+        name="priority"
+      >
+        <option value="LOW">LOW</option>
+        <option value="MEDIUM">MEDIUM</option>
+        <option value="HIGH">HIGH</option>
+      </select>
+
+      <button
+        type="submit"
+        class="btn btn-success w-full">
+        Update
+      </button>
+
+    </form>
+
+    <div class="modal-action">
+      <button
+        type="button"
+        class="btn"
+        (click)="close()">
+        Close
+      </button>
+    </div>
+
+  </div>
+</dialog>
