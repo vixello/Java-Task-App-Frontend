@@ -1,7 +1,12 @@
 <!-- Button to open modal -->
 <!-- <button class="btn btn-primary" (click)="open()">Create Task</button> -->
-<button (click)="open()" class="btn btn-circle btn-primary hover:scale-105 transition">
-  <fa-icon [icon]="['fas', 'plus']" class="text-xl"></fa-icon>
+<button
+  type="button"
+  (click)="open()"
+  class="btn btn-neutral btn-circle transition-transform hover:scale-105"
+  aria-label="Create task"
+>
+  <fa-icon [icon]="['fas', 'plus']"></fa-icon>
 </button>
 
 <!-- Modal -->

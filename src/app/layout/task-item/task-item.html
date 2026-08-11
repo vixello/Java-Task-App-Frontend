@@ -1,14 +1,27 @@
-<article
-  class="group rounded-xl border border-base-300/70 bg-base-100 px-4 py-4 transition-colors hover:border-base-300 hover:bg-base-200/30"
->
+<!-- 
+ | Klasa                   | Technologia        | Co robi                                               | Efekt                                 |
+| ----------------------- | ------------------ | ----------------------------------------------------- | ------------------------------------- |
+| `group`                 | Tailwind           | Tworzy grupę dla elementów wewnątrz                   | Pozwala używać np. `group-hover:*`    |
+| `rounded-xl`            | Tailwind           | Zaokrągla rogi                                        | Duże, ale nadal subtelne zaokrąglenie |
+| `border`                | Tailwind           | Dodaje obramowanie `1px`                              | Delikatna ramka wokół taska           |
+| `border-base-300/70`    | DaisyUI + Tailwind | Ustawia kolor bordera na `base-300` z 70% opacity     | Subtelna ramka                        |
+| `bg-base-100`           | DaisyUI            | Ustawia kolor tła `base-100`                          | Standardowe tło komponentu            |
+| `px-4`                  | Tailwind           | Padding poziomy                                       | `padding-left/right: 1rem`            |
+| `py-4`                  | Tailwind           | Padding pionowy                                       | `padding-top/bottom: 1rem`            |
+| `transition-colors`     | Tailwind           | Animuje zmiany kolorów                                | Hover nie zmienia się nagle           |
+| `hover:border-base-300` | DaisyUI + Tailwind | Po najechaniu zmienia border na `base-300`            | Border staje się bardziej widoczny    |
+| `hover:bg-base-200/30`  | DaisyUI + Tailwind | Po najechaniu zmienia tło na `base-200` z 30% opacity | Bardzo delikatny efekt hover          |
+ -->
+
+<article class="group rounded-xl border border-base-300 bg-base-200 px-4 py-4
+         transition-colors
+         hover:border-base-content/20
+         hover:bg-base-200/80">
   <div class="flex items-start gap-4">
 
     <!-- priority -->
     <div class="mt-1 shrink-0">
-      <fa-icon
-        [icon]="priorityIcon"
-        [ngClass]="priorityColor"
-        class="text-sm">
+      <fa-icon [icon]="priorityIcon" [ngClass]="priorityColor" class="text-sm">
       </fa-icon>
     </div>
 
@@ -24,25 +37,14 @@
           </h3>
         </div>
 
-        <div
-          class="flex shrink-0 items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100"
-        >
+        <div class="flex shrink-0 items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100">
 
-          <button
-            type="button"
-            (click)="editTask()"
-            class="btn btn-ghost btn-square btn-xs"
-            aria-label="Edit task"
-          >
+          <button type="button" (click)="editTask()" class="btn btn-ghost btn-square btn-xs" aria-label="Edit task">
             <fa-icon [icon]="['fas', 'pen']"></fa-icon>
           </button>
 
-          <button
-            type="button"
-            (click)="deleteTask()"
-            class="btn btn-ghost btn-square btn-xs text-error"
-            aria-label="Delete task"
-          >
+          <button type="button" (click)="deleteTask()" class="btn btn-ghost btn-square btn-xs text-error"
+            aria-label="Delete task">
             <fa-icon [icon]="['fas', 'trash']"></fa-icon>
           </button>
 
@@ -51,28 +53,20 @@
 
       <!-- description -->
       @if (task.description) {
-        <p class="mt-1.5 line-clamp-2 text-sm leading-5 text-base-content/60">
-          {{ task.description }}
-        </p>
+      <p class="mt-1.5 line-clamp-2 text-sm leading-5 text-base-content/60">
+        {{ task.description }}
+      </p>
       }
 
       <!-- bottom row -->
       <div class="mt-3 flex items-center justify-between">
 
-        <span
-          class="text-[11px] font-medium uppercase tracking-wide text-base-content/40"
-        >
+        <span class="text-[11px] font-medium uppercase tracking-wide text-base-content/40">
           {{ task.priority }}
         </span>
 
-        <button
-          type="button"
-          class="btn btn-ghost btn-circle btn-sm text-success"
-          aria-label="Mark as finished"
-        >
-          <fa-icon
-            [icon]="['fas', 'check']"
-            class="text-sm">
+        <button type="button" class="btn btn-ghost btn-circle btn-sm text-success" aria-label="Mark as finished">
+          <fa-icon [icon]="['fas', 'check']" class="text-sm">
           </fa-icon>
         </button>
 
