@@ -122,7 +122,8 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 
 
-<!-- ROADMAP -->
+<!-- ROADMAP 
+
 ## Roadmap
 
 - [ ] Feature 1
@@ -134,6 +135,8 @@ See the [open issues](https://github.com/vixello/Java-Task-App-Frontend/issues) 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+
+-->
 
 <!-- CONTACT -->
 ## Contact
