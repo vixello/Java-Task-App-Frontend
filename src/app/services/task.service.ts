@@ -20,8 +20,8 @@ export interface TaskDto {
 })
 
 export class TaskService {
-    private apiUrl = 'http://localhost:8080/api/v1/tasks';
-
+    /*private  apiUrl = 'http://localhost:8080/api/v1/tasks'; */
+    private apiUrl = 'https://java-task-app.onrender.com/api/v1/tasks'
     constructor(private http: HttpClient) { }
 
     getTasks(): Observable<TaskDto[]> {
