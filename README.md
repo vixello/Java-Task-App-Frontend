@@ -114,7 +114,7 @@ docker build -t task-frontend .
 ```
 2. Run the container
 ```sh
- docker run -p 4200:4200 task-frontend
+docker run -p 4200:4200 task-frontend
 ```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
