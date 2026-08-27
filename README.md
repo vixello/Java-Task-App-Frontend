@@ -78,13 +78,9 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-Here's a blank template to get started. To avoid retyping too much info, do a search and replace with your text editor for the following: `vixello`, `Java-Task-App-Frontend`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`, `project_license`
+This is a simple project that implements basic CRUD operations for a task management app. The backend is located at:  [https://github.com/vixello/Java-Task-App](https://github.com/vixello/Java-Task-App)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 ### Built With
@@ -108,7 +104,7 @@ Here's a blank template to get started. To avoid retyping too much info, do a se
 
 ### Getting Started
 
-## Run the frontend using Docker
+#### Run the frontend using Docker
 
 You can run the Angular frontend inside a Docker container.
 
@@ -120,13 +116,6 @@ docker build -t task-frontend .
 ```sh
  docker run -p 4200:4200 task-frontend
 ```
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
