@@ -108,9 +108,18 @@ Here's a blank template to get started. To avoid retyping too much info, do a se
 
 ### Getting Started
 
-There is no need to download the project, it's deployed on deploy_name.
+## Run the frontend using Docker
 
+You can run the Angular frontend inside a Docker container.
 
+1. Build the Docker image  
+```sh
+docker build -t task-frontend .
+```
+2. Run the container
+```sh
+ docker run -p 4200:4200 task-frontend
+```
 <!-- USAGE EXAMPLES -->
 ## Usage
 
